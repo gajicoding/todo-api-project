@@ -11,6 +11,7 @@
 - Lv 5. 예외 발생 처리
 
 ## API 명세서
+- Postman: [document](https://documenter.getpostman.com/view/44635744/2sB2j9687J)
 
 [//]: # (일정 생성)
 <details>
