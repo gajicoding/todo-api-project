@@ -1,4 +1,4 @@
-package com.guthub.gajicoding.todo_api_project;
+package com.github.gajicoding.todo_api_project;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
