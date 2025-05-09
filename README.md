@@ -205,6 +205,7 @@
 ## 문제 해결 (트러블 슈팅)
 프로젝트를 진행하면서 겪은 문제 상황, 해결 정리
 
+-[406 Not Acceptable - responseDTO @Getter 의 중요성](https://gajicoding.tistory.com/329)
 
 
 
