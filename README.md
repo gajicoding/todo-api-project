@@ -180,17 +180,31 @@
 </details>
 
 
-## ERD 설계 및 구현
-- 개념적 설계: 
-  - ![er](./images/er.png)
-- 논리적 설계(ERD): 
-  - ![erd](./images/erd.png)
-- 물리적 설계(SQL): 
-  - [todo.sql](./todo.sql)
-  - ![erd2](./images/erd2.png)
+## 데이터 베이스 설계
+<details>
+<summary>데이터 베이스 단계별 설계</summary>
+
+- 개념적 설계:
+    - ![er](./images/er.png)
+- 논리적 설계(ERD):
+    - ![erd](./images/erd.png)
+- 물리적 설계(SQL):
+    - [todo.sql](./todo.sql)
+    - ![erd2](./images/erd2.png)
+</details>
 
 
+## 새로운 지식 및 트러블 슈팅
+프로젝트를 진행하면서 알게된 지식과, 문제 해결 정리
 
+- 새로운 지식
+  - [빌더 패턴 (Builder Pattern)](https://gajicoding.tistory.com/325)
+  - [생성자 vs 정적 팩토리 메서드 vs 빌더 패턴](https://gajicoding.tistory.com/327)
+  - [Entity와 DTO(Data Transfer Object)의 차이](https://gajicoding.tistory.com/324)
+  - [Repository에서 Request/Response DTO 를 사용해도 될까?](https://gajicoding.tistory.com/328)
+
+- 문제 해결 (트러블 슈팅)
+  - 111
 
 
 
