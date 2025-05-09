@@ -179,3 +179,18 @@
 ```
 </details>
 
+
+## ERD 설계 및 구현
+- 개념적 설계: 
+  - ![er](./images/er.png)
+- 논리적 설계(ERD): 
+  - ![erd](./images/erd.png)
+- 물리적 설계(SQL): 
+  - [todo.sql](./todo.sql)
+  - ![erd2](./images/erd2.png)
+
+
+
+
+
+
