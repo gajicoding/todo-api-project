@@ -182,7 +182,7 @@
 
 ## 데이터 베이스 설계
 <details>
-<summary>데이터 베이스 단계별 설계</summary>
+<summary>필수 기능 DB 설계</summary>
 
 - 개념적 설계:
     - ![er](./images/er.png)
