@@ -194,17 +194,17 @@
 </details>
 
 
-## 새로운 지식 및 트러블 슈팅
-프로젝트를 진행하면서 알게된 지식과, 문제 해결 정리
+## 새로운 지식
+프로젝트를 진행하면서 알게된 지식 정리
 
-- 새로운 지식
-  - [빌더 패턴 (Builder Pattern)](https://gajicoding.tistory.com/325)
-  - [생성자 vs 정적 팩토리 메서드 vs 빌더 패턴](https://gajicoding.tistory.com/327)
-  - [Entity와 DTO(Data Transfer Object)의 차이](https://gajicoding.tistory.com/324)
-  - [Repository에서 Request/Response DTO 를 사용해도 될까?](https://gajicoding.tistory.com/328)
+- [빌더 패턴 (Builder Pattern)](https://gajicoding.tistory.com/325)
+- [생성자 vs 정적 팩토리 메서드 vs 빌더 패턴](https://gajicoding.tistory.com/327)
+- [Entity와 DTO(Data Transfer Object)의 차이](https://gajicoding.tistory.com/324)
+- [Repository에서 Request/Response DTO 를 사용해도 될까?](https://gajicoding.tistory.com/328)
 
-- 문제 해결 (트러블 슈팅)
-  - 111
+## 문제 해결 (트러블 슈팅)
+프로젝트를 진행하면서 겪은 문제 상황, 해결 정리
+
 
 
 
