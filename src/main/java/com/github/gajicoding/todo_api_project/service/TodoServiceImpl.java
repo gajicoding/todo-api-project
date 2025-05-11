@@ -6,9 +6,10 @@ import com.github.gajicoding.todo_api_project.data.dto.TodoResponseDTO;
 import com.github.gajicoding.todo_api_project.data.dto.TodoSearchParameters;
 import com.github.gajicoding.todo_api_project.data.entity.Todo;
 import com.github.gajicoding.todo_api_project.repository.TodoRepository;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,26 +28,67 @@ public class TodoServiceImpl implements TodoService {
     @Transactional
     public TodoResponseDTO saveTodo(TodoRequestDTO req) {
         req.setPassword(passwordEncryptor.encode(req.getPassword()));
-        Todo todo = req.toEntity();
+        Todo reqTodo = req.toEntity();
 
-        long id = todoRepository.saveTodo(todo);
+        long id = todoRepository.saveTodo(reqTodo);
 
-        Todo res = todoRepository.findTodoByIdOrElseThrow(id);
-        return new TodoResponseDTO(res);
+        Todo resTodo = todoRepository.findTodoById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "해당 일정이 존재하지 않습니다."));
+        return new TodoResponseDTO(resTodo);
     }
 
     @Override
     public List<TodoResponseDTO> findTodosBySearchParams(TodoSearchParameters searchParams) {
-        List<Todo> todoList = todoRepository.findTodosBySearchParams(searchParams);
+        List<Todo> resTodos = todoRepository.findTodosBySearchParams(searchParams);
 
-        return todoList.stream()
+        return resTodos.stream()
                 .map(TodoResponseDTO::new)
                 .collect(Collectors.toList());
     }
 
     @Override
     public TodoResponseDTO findTodoById(Long id) {
-        Todo todo = todoRepository.findTodoByIdOrElseThrow(id);
-        return new TodoResponseDTO(todo);
+        Todo resTodo = todoRepository.findTodoById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "해당 일정이 존재하지 않습니다."));
+        return new TodoResponseDTO(resTodo);
+    }
+
+    @Override
+    public TodoResponseDTO updateTodo(Long id, TodoRequestDTO req) {
+        passwordCheck(id, req);
+
+        Todo reqTodo = req.toEntity();
+
+        int updatedRow = todoRepository.updateTodo(id, reqTodo);
+        if (updatedRow == 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "변경된 내용이 없습니다.");
+        }
+
+       Todo resTodo = todoRepository.findTodoById(id)
+               .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "해당 일정이 존재하지 않습니다."));
+       return new TodoResponseDTO(resTodo);
+    }
+
+    @Override
+    public void deleteTodo(Long id, TodoRequestDTO req) {
+        passwordCheck(id, req);
+
+        int deletedRow = todoRepository.deleteTodo(id);
+        if (deletedRow == 0) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "해당 일정이 존재하지 않습니다.");
+        }
+
+    }
+
+    private void passwordCheck(Long id, TodoRequestDTO req){
+        Todo originalTodo = todoRepository.findTodoById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "해당 일정이 존재하지 않습니다."));
+
+        if(!passwordMatches(req.getPassword(), originalTodo.getPassword())){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "비밀번호가 올바르지 않습니다.");
+        }
+    }
+
+    private boolean passwordMatches(String password, String encodedPassword) {
+        return password != null && passwordEncryptor.matches(password, encodedPassword);
     }
 }

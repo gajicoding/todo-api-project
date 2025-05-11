@@ -1,22 +1,15 @@
 package com.github.gajicoding.todo_api_project.repository;
 
-import com.github.gajicoding.todo_api_project.common.security.PasswordEncryptor;
-import com.github.gajicoding.todo_api_project.data.dto.TodoResponseDTO;
 import com.github.gajicoding.todo_api_project.data.dto.TodoSearchParameters;
 import com.github.gajicoding.todo_api_project.data.entity.Todo;
-import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.server.ResponseStatusException;
 
 import javax.sql.DataSource;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Repository
 public class TodoRepositoryImpl implements TodoRepository {
@@ -27,17 +20,17 @@ public class TodoRepositoryImpl implements TodoRepository {
     }
 
     @Override
-    public long saveTodo(Todo todo) {
+    public long saveTodo(Todo reqTodo) {
         SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
         jdbcInsert.withTableName("todos")
                 .usingGeneratedKeyColumns("id")
                 .usingColumns("title", "contents", "author", "password");
 
         Map<String, Object> parameters = new HashMap<>() {{
-            put("title", todo.getTitle());
-            put("contents", todo.getContents());
-            put("author", todo.getAuthor());
-            put("password", todo.getAuthor());
+            put("title", reqTodo.getTitle());
+            put("contents", reqTodo.getContents());
+            put("author", reqTodo.getAuthor());
+            put("password", reqTodo.getPassword());
         }};
 
         Number key = jdbcInsert.executeAndReturnKey(new MapSqlParameterSource(parameters));
@@ -46,14 +39,8 @@ public class TodoRepositoryImpl implements TodoRepository {
     }
 
     @Override
-    public Todo findTodoByIdOrElseThrow(long id) {
-        return jdbcTemplate.query("SELECT * FROM todos WHERE id = ?", todoRowMapper(), id).stream().findAny().orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "해당 일정이 존재하지 않습니다."));
-    }
-
-    @Override
-    public List<Todo> findAllTodos() {
-        return jdbcTemplate.query("SELECT * FROM todos ORDER BY updated_at DESC", todoRowMapper());
+    public Optional<Todo> findTodoById(long id) {
+        return jdbcTemplate.query("SELECT * FROM todos WHERE id = ?", todoRowMapper(), id).stream().findAny();
     }
 
     @Override
@@ -76,12 +63,49 @@ public class TodoRepositoryImpl implements TodoRepository {
         return jdbcTemplate.query(sql.toString(), todoRowMapper(), params.toArray());
     }
 
+    @Override
+    public int updateTodo(Long id, Todo reqTodo) {
+        StringBuilder sql = new StringBuilder("UPDATE todos SET");
+        List<Object> params = new ArrayList<>();
+
+        if (reqTodo.getTitle() != null) {
+            sql.append(" title = ?, ");
+            params.add(reqTodo.getTitle());
+        }
+
+        if (reqTodo.getContents() != null) {
+            sql.append(" contents = ?, ");
+            params.add(reqTodo.getContents());
+        }
+
+        if (reqTodo.getAuthor() != null) {
+            sql.append(" author = ?, ");
+            params.add(reqTodo.getAuthor());
+        }
+
+        if (params.isEmpty()) {
+            return 0;
+        }
+
+        sql.setLength(sql.length() - 2);
+        sql.append(" WHERE id = ?");
+        params.add(id);
+
+        return jdbcTemplate.update(sql.toString(), params.toArray());
+    }
+
+    @Override
+    public int deleteTodo(Long id) {
+        return jdbcTemplate.update("DELETE FROM todos WHERE id = ?", id);
+    }
+
     private RowMapper<Todo> todoRowMapper() {
         return (rs, rowNum) -> new Todo(
                 rs.getLong("id"),
                 rs.getString("title"),
                 rs.getString("contents"),
                 rs.getString("author"),
+                rs.getString("password"),
                 rs.getTimestamp("created_at") != null ? rs.getTimestamp("created_at").toLocalDateTime() : null,
                 rs.getTimestamp("updated_at") != null ? rs.getTimestamp("updated_at").toLocalDateTime() : null
         );

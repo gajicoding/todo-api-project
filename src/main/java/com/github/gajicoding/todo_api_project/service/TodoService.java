@@ -12,4 +12,8 @@ public interface TodoService {
     List<TodoResponseDTO> findTodosBySearchParams(TodoSearchParameters todoSearchParameters);
 
     TodoResponseDTO findTodoById(Long id);
+
+    TodoResponseDTO updateTodo(Long id, TodoRequestDTO req);
+
+    void deleteTodo(Long id, TodoRequestDTO req);
 }

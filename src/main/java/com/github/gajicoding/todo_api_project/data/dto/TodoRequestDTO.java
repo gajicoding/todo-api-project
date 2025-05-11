@@ -1,10 +1,12 @@
 package com.github.gajicoding.todo_api_project.data.dto;
 
 import com.github.gajicoding.todo_api_project.data.entity.Todo;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
+@AllArgsConstructor
 public class TodoRequestDTO {
     private String title;
     private String contents;
@@ -17,6 +19,7 @@ public class TodoRequestDTO {
                 .title(title)
                 .contents(contents)
                 .author(author)
+                .password(password)
                 .build();
     }
 }
