@@ -1,4 +1,4 @@
-package com.github.gajicoding.todo_api_project.entity;
+package com.github.gajicoding.todo_api_project.data.entity;
 
 import lombok.Builder;
 import lombok.Getter;

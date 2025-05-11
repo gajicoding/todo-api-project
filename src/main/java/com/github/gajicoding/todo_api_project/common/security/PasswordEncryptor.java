@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class PasswordEncryptor {
-    private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+    private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     public String encode(String password) {
         return encoder.encode(password);

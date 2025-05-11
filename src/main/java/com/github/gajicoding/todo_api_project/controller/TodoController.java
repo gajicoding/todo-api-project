@@ -1,8 +1,8 @@
 package com.github.gajicoding.todo_api_project.controller;
 
-import com.github.gajicoding.todo_api_project.dto.TodoRequestDTO;
-import com.github.gajicoding.todo_api_project.dto.TodoResponseDTO;
-import com.github.gajicoding.todo_api_project.dto.TodoSearchParameters;
+import com.github.gajicoding.todo_api_project.data.dto.TodoRequestDTO;
+import com.github.gajicoding.todo_api_project.data.dto.TodoResponseDTO;
+import com.github.gajicoding.todo_api_project.data.dto.TodoSearchParameters;
 import com.github.gajicoding.todo_api_project.service.TodoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,4 +37,5 @@ public class TodoController {
     public ResponseEntity<TodoResponseDTO> findTodoById(@PathVariable Long id) {
         return new ResponseEntity<>(todoService.findTodoById(id), HttpStatus.OK);
     }
+
 }

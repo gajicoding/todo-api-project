@@ -1,6 +1,8 @@
 package com.github.gajicoding.todo_api_project.repository;
 
-import com.github.gajicoding.todo_api_project.entity.Todo;
+import com.github.gajicoding.todo_api_project.data.dto.TodoResponseDTO;
+import com.github.gajicoding.todo_api_project.data.dto.TodoSearchParameters;
+import com.github.gajicoding.todo_api_project.data.entity.Todo;
 
 import java.util.List;
 
@@ -10,4 +12,6 @@ public interface TodoRepository {
     Todo findTodoByIdOrElseThrow(long id);
 
     List<Todo> findAllTodos();
+
+    List<Todo> findTodosBySearchParams(TodoSearchParameters searchParams);
 }

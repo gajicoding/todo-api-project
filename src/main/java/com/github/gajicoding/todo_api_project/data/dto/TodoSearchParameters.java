@@ -1,4 +1,4 @@
-package com.github.gajicoding.todo_api_project.dto;
+package com.github.gajicoding.todo_api_project.data.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
