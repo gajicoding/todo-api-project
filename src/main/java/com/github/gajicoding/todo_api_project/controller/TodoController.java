@@ -25,12 +25,12 @@ public class TodoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<TodoResponseDTO>> findAllTodos(
+    public ResponseEntity<List<TodoResponseDTO>> findTodosBySearchParams(
             @RequestParam(required = false) String author,
             @RequestParam(required = false) String updatedAt
     ) {
         TodoSearchParameters searchParams = new TodoSearchParameters(author, updatedAt);
-        return new ResponseEntity<>(todoService.findAllMemos(searchParams), HttpStatus.OK);
+        return new ResponseEntity<>(todoService.findTodosBySearchParams(searchParams), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

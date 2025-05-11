@@ -9,7 +9,7 @@ import java.util.List;
 public interface TodoService {
     TodoResponseDTO saveTodo(TodoRequestDTO req);
 
-    List<TodoResponseDTO> findAllMemos(TodoSearchParameters todoSearchParameters);
+    List<TodoResponseDTO> findTodosBySearchParams(TodoSearchParameters todoSearchParameters);
 
     TodoResponseDTO findTodoById(Long id);
 }

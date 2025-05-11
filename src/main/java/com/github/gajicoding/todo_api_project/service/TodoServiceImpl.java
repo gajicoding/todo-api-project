@@ -36,7 +36,7 @@ public class TodoServiceImpl implements TodoService {
     }
 
     @Override
-    public List<TodoResponseDTO> findAllMemos(TodoSearchParameters searchParams) {
+    public List<TodoResponseDTO> findTodosBySearchParams(TodoSearchParameters searchParams) {
         List<Todo> todoList = todoRepository.findTodosBySearchParams(searchParams);
 
         return todoList.stream()
