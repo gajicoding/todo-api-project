@@ -4,9 +4,13 @@ import com.github.gajicoding.todo_api_project.api.v2.data.dto.TodoSearchParamete
 import com.github.gajicoding.todo_api_project.api.v2.data.dto.TodoRequestDTO;
 import com.github.gajicoding.todo_api_project.api.v2.data.dto.TodoResponseDTO;
 import com.github.gajicoding.todo_api_project.api.v2.service.TodoService;
+import com.github.gajicoding.todo_api_project.api.v2.validation.CreateGroup;
+import com.github.gajicoding.todo_api_project.api.v2.validation.DeleteGroup;
+import com.github.gajicoding.todo_api_project.api.v2.validation.UpdateGroup;
 import com.github.gajicoding.todo_api_project.common.dto.PageResponseDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -20,7 +24,7 @@ public class TodoController {
     }
 
     @PostMapping
-    public ResponseEntity<TodoResponseDTO> saveTodo(@RequestBody TodoRequestDTO req){
+    public ResponseEntity<TodoResponseDTO> saveTodo(@RequestBody @Validated(CreateGroup.class) TodoRequestDTO req){
         System.out.println(req);
         return new ResponseEntity<>(todoService.saveTodo(req), HttpStatus.CREATED);
     }
@@ -42,12 +46,12 @@ public class TodoController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<TodoResponseDTO> updateTodo(@PathVariable Long id, @RequestBody TodoRequestDTO req) {
+    public ResponseEntity<TodoResponseDTO> updateTodo(@PathVariable Long id, @RequestBody @Validated(UpdateGroup.class) TodoRequestDTO req) {
         return new ResponseEntity<>(todoService.updateTodo(id, req), HttpStatus.OK);
     }
 
     @PostMapping("/{id}")
-    public ResponseEntity<Void> deleteTodo(@PathVariable Long id, @RequestBody TodoRequestDTO req) {
+    public ResponseEntity<Void> deleteTodo(@PathVariable Long id, @RequestBody @Validated(DeleteGroup.class) TodoRequestDTO req) {
         todoService.deleteTodo(id, req);
         return new ResponseEntity<>(HttpStatus.OK);
     }

@@ -3,8 +3,10 @@ package com.github.gajicoding.todo_api_project.api.v2.controller;
 import com.github.gajicoding.todo_api_project.api.v2.data.dto.AuthorRequestDTO;
 import com.github.gajicoding.todo_api_project.api.v2.data.dto.AuthorResponseDTO;
 import com.github.gajicoding.todo_api_project.api.v2.service.AuthorService;
+import com.github.gajicoding.todo_api_project.api.v2.validation.CreateGroup;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +22,7 @@ public class AuthorController {
     }
 
     @PostMapping
-    public ResponseEntity<AuthorResponseDTO> save(@RequestBody AuthorRequestDTO req) {
+    public ResponseEntity<AuthorResponseDTO> save(@RequestBody @Validated(CreateGroup.class) AuthorRequestDTO req) {
         return new ResponseEntity<>(authorService.addAuthor(req), HttpStatus.CREATED);
     }
 }
