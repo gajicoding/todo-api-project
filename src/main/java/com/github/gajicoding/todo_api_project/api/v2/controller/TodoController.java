@@ -13,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
+
 
 @RestController("todoControllerV2")
 @RequestMapping("/api/v2/todos")
@@ -51,9 +53,9 @@ public class TodoController {
     }
 
     @PostMapping("/{id}")
-    public ResponseEntity<Void> deleteTodo(@PathVariable Long id, @RequestBody @Validated(DeleteGroup.class) TodoRequestDTO req) {
+    public ResponseEntity<Object> deleteTodo(@PathVariable Long id, @RequestBody @Validated(DeleteGroup.class) TodoRequestDTO req) {
         todoService.deleteTodo(id, req);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(Collections.singletonMap("message", "일정이 성공적으로 삭제되었습니다."), HttpStatus.OK);
     }
 
 }
