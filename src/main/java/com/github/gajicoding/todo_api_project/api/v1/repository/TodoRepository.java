@@ -1,7 +1,7 @@
-package com.github.gajicoding.todo_api_project.repository;
+package com.github.gajicoding.todo_api_project.api.v1.repository;
 
-import com.github.gajicoding.todo_api_project.data.dto.TodoSearchParameters;
-import com.github.gajicoding.todo_api_project.data.entity.Todo;
+import com.github.gajicoding.todo_api_project.api.v1.data.dto.TodoSearchParameters;
+import com.github.gajicoding.todo_api_project.api.v1.data.entity.Todo;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,9 +1,9 @@
-package com.github.gajicoding.todo_api_project.controller;
+package com.github.gajicoding.todo_api_project.api.v1.controller;
 
-import com.github.gajicoding.todo_api_project.data.dto.TodoRequestDTO;
-import com.github.gajicoding.todo_api_project.data.dto.TodoResponseDTO;
-import com.github.gajicoding.todo_api_project.data.dto.TodoSearchParameters;
-import com.github.gajicoding.todo_api_project.service.TodoService;
+import com.github.gajicoding.todo_api_project.api.v1.data.dto.TodoRequestDTO;
+import com.github.gajicoding.todo_api_project.api.v1.data.dto.TodoResponseDTO;
+import com.github.gajicoding.todo_api_project.api.v1.data.dto.TodoSearchParameters;
+import com.github.gajicoding.todo_api_project.api.v1.service.TodoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/todos")
+@RequestMapping("/api/v1/todos")
 public class TodoController {
     private final TodoService todoService;
 
