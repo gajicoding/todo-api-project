@@ -9,16 +9,20 @@
 - Lv 3. 연관 관계 설정
 - Lv 4. 페이지네이션
 - Lv 5. 예외 발생 처리
+- Lv 6. null 체크 및 특정 패턴에 대한 검증 수행
 
 ## API 명세서
 - Postman: [document](https://documenter.getpostman.com/view/44635744/2sB2j9687J)
+
+
+### 필수기능
 
 [//]: # (일정 생성)
 <details>
 <summary>일정 생성 API</summary>
 
 - Method: POST
-- URL: `/todos`
+- URL: `/api/v1/todos`
 - Request Body
 ```json5
 {
@@ -47,7 +51,7 @@
 <summary>전체 일정 조회 API</summary>
 
 - Method: GET
-- URL: `/todos`
+- URL: `/api/v1/todos`
 - Query Parameters
     - updatedAt: 수정일
         - type: String
@@ -84,7 +88,7 @@
 <summary>선택 일정 조회 API</summary>
 
 - Method: GET
-- URL: `/todos/{id}`
+- URL: `/api/v1/todos/{id}`
 - Response (200 OK)
 ```json
 {
@@ -110,7 +114,7 @@
 <summary>선택 일정 수정 API</summary>
 
 - Method: PATCH
-- URL: `/todos/{id}`
+- URL: `/api/v1/todos/{id}`
 - Request Body
 ```json5
 {
@@ -151,7 +155,7 @@
 <summary>선택 일정 삭제 API</summary>
 
 - Method: POST
-- URL: `/todos/{id}`
+- URL: `/api/v1/todos/{id}`
 - Request Body
 ```json5
 {
@@ -180,6 +184,10 @@
 </details>
 
 
+### 도전 기능
+
+
+
 ## 데이터 베이스 설계
 <details>
 <summary>필수 기능 DB 설계</summary>
@@ -190,13 +198,23 @@
     - ![erd](./images/erd.png)
 - 물리적 설계(SQL):
     - [todo.sql](./todo.sql)
-    - ![erd2](./images/erd2.png)
+    - ![erdE](./images/erdE.png)
 </details>
 
+<details>
+<summary>도전 기능 DB 설계</summary>
+
+- 개념적 설계:
+    - ![er2](./images/er2.png)
+- 논리적 설계(ERD):
+    - ![erd2](./images/erd2.png)
+- 물리적 설계(SQL):
+    - [todo_v2.sql](./todo_v2.sql)
+    - ![erdE2](./images/erdE2.png)
+</details>
 
 ## 새로운 지식
 프로젝트를 진행하면서 알게된 지식 정리
-
 - [빌더 패턴 (Builder Pattern)](https://gajicoding.tistory.com/325)
 - [생성자 vs 정적 팩토리 메서드 vs 빌더 패턴](https://gajicoding.tistory.com/327)
 - [Entity와 DTO(Data Transfer Object)의 차이](https://gajicoding.tistory.com/324)
@@ -204,7 +222,6 @@
 
 ## 문제 해결 (트러블 슈팅)
 프로젝트를 진행하면서 겪은 문제 상황, 해결 정리
-
 - [406 Not Acceptable - responseDTO @Getter 의 중요성](https://gajicoding.tistory.com/329)
 
 
