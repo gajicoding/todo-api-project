@@ -1,11 +1,11 @@
-package com.github.gajicoding.todo_api_project.service;
+package com.github.gajicoding.todo_api_project.api.v1.service;
 
 import com.github.gajicoding.todo_api_project.common.security.PasswordEncryptor;
-import com.github.gajicoding.todo_api_project.data.dto.TodoRequestDTO;
-import com.github.gajicoding.todo_api_project.data.dto.TodoResponseDTO;
-import com.github.gajicoding.todo_api_project.data.dto.TodoSearchParameters;
-import com.github.gajicoding.todo_api_project.data.entity.Todo;
-import com.github.gajicoding.todo_api_project.repository.TodoRepository;
+import com.github.gajicoding.todo_api_project.api.v1.data.dto.TodoRequestDTO;
+import com.github.gajicoding.todo_api_project.api.v1.data.dto.TodoResponseDTO;
+import com.github.gajicoding.todo_api_project.api.v1.data.dto.TodoSearchParameters;
+import com.github.gajicoding.todo_api_project.api.v1.data.entity.Todo;
+import com.github.gajicoding.todo_api_project.api.v1.repository.TodoRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -84,7 +84,7 @@ public class TodoServiceImpl implements TodoService {
         Todo originalTodo = todoRepository.findTodoById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "해당 일정이 존재하지 않습니다."));
 
         if(!passwordMatches(req.getPassword(), originalTodo.getPassword())){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "비밀번호가 올바르지 않습니다.");
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "비밀번호가 올바르지 않습니다.");
         }
     }
 

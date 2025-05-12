@@ -1,8 +1,8 @@
-package com.github.gajicoding.todo_api_project.service;
+package com.github.gajicoding.todo_api_project.api.v1.service;
 
-import com.github.gajicoding.todo_api_project.data.dto.TodoRequestDTO;
-import com.github.gajicoding.todo_api_project.data.dto.TodoResponseDTO;
-import com.github.gajicoding.todo_api_project.data.dto.TodoSearchParameters;
+import com.github.gajicoding.todo_api_project.api.v1.data.dto.TodoRequestDTO;
+import com.github.gajicoding.todo_api_project.api.v1.data.dto.TodoResponseDTO;
+import com.github.gajicoding.todo_api_project.api.v1.data.dto.TodoSearchParameters;
 
 import java.util.List;
 
