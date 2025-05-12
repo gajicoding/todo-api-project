@@ -1,14 +1,14 @@
-package com.github.gajicoding.todo_api_project.api.v2.service;
+package com.github.gajicoding.todo_api_project.api.v2.service.impl;
 
 import com.github.gajicoding.todo_api_project.api.v2.data.dto.AuthorRequestDTO;
 import com.github.gajicoding.todo_api_project.api.v2.data.dto.AuthorResponseDTO;
 import com.github.gajicoding.todo_api_project.api.v2.data.entity.Author;
+import com.github.gajicoding.todo_api_project.api.v2.exception.AuthorExceptions;
 import com.github.gajicoding.todo_api_project.api.v2.repository.AuthorRepository;
+import com.github.gajicoding.todo_api_project.api.v2.service.AuthorService;
 import com.github.gajicoding.todo_api_project.common.security.PasswordEncryptor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class AuthorServiceImpl implements AuthorService {
@@ -24,7 +24,7 @@ public class AuthorServiceImpl implements AuthorService {
     @Transactional
     public AuthorResponseDTO addAuthor(AuthorRequestDTO req) {
         if(authorRepository.existsByEmail(req.getEmail())) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "이미 존재하는 이메일입니다.");
+            throw AuthorExceptions.emailAlreadyExists();
         }
 
         req.setPassword(passwordEncryptor.encode(req.getPassword()));
@@ -38,6 +38,6 @@ public class AuthorServiceImpl implements AuthorService {
 
     private Author findAuthorById(Long id){
         return authorRepository.findAuthorById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "해당 작성자가 존재하지 않습니다."));
+                .orElseThrow(AuthorExceptions::notFound);
     }
 }

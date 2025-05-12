@@ -1,9 +1,10 @@
-package com.github.gajicoding.todo_api_project.api.v2.repository;
+package com.github.gajicoding.todo_api_project.api.v2.repository.impl;
 
 
 import com.github.gajicoding.todo_api_project.api.v2.data.dto.TodoSearchParameters;
 import com.github.gajicoding.todo_api_project.api.v2.data.entity.Author;
 import com.github.gajicoding.todo_api_project.api.v2.data.entity.Todo;
+import com.github.gajicoding.todo_api_project.api.v2.repository.TodoRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -15,7 +16,7 @@ import javax.sql.DataSource;
 import java.util.*;
 
 @Repository("todoRepositoryV2")
-public class TodoRepositoryImpl implements TodoRepository{
+public class TodoRepositoryImpl implements TodoRepository {
     private final JdbcTemplate jdbcTemplate;
 
     public TodoRepositoryImpl(@Qualifier("todoV2DataSource") DataSource dataSource) {

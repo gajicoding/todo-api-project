@@ -1,6 +1,7 @@
-package com.github.gajicoding.todo_api_project.api.v2.repository;
+package com.github.gajicoding.todo_api_project.api.v2.repository.impl;
 
 import com.github.gajicoding.todo_api_project.api.v2.data.entity.Author;
+import com.github.gajicoding.todo_api_project.api.v2.repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;

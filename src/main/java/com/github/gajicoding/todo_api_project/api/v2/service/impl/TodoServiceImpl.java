@@ -1,24 +1,25 @@
-package com.github.gajicoding.todo_api_project.api.v2.service;
-
+package com.github.gajicoding.todo_api_project.api.v2.service.impl;
 
 import com.github.gajicoding.todo_api_project.api.v2.data.dto.TodoRequestDTO;
 import com.github.gajicoding.todo_api_project.api.v2.data.dto.TodoResponseDTO;
 import com.github.gajicoding.todo_api_project.api.v2.data.dto.TodoSearchParameters;
 import com.github.gajicoding.todo_api_project.api.v2.data.entity.Author;
 import com.github.gajicoding.todo_api_project.api.v2.data.entity.Todo;
+import com.github.gajicoding.todo_api_project.api.v2.exception.AuthorExceptions;
+import com.github.gajicoding.todo_api_project.api.v2.exception.TodoExceptions;
 import com.github.gajicoding.todo_api_project.api.v2.repository.AuthorRepository;
 import com.github.gajicoding.todo_api_project.api.v2.repository.TodoRepository;
+import com.github.gajicoding.todo_api_project.api.v2.service.TodoService;
 import com.github.gajicoding.todo_api_project.common.dto.PageResponseDTO;
 import com.github.gajicoding.todo_api_project.common.security.PasswordEncryptor;
-import org.springframework.http.HttpStatus;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
 @Service("todoServiceV2")
-public class TodoServiceImpl implements TodoService{
+public class TodoServiceImpl implements TodoService {
     private final TodoRepository todoRepository;
     private final AuthorRepository authorRepository;
     private final PasswordEncryptor passwordEncryptor;
@@ -35,7 +36,7 @@ public class TodoServiceImpl implements TodoService{
         Todo reqTodo = req.toEntity();
 
         if(!authorRepository.existsById(req.getAuthorId())){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "해당 작성자가 존재하지 않습니다.");
+            throw AuthorExceptions.notFound();
         }
 
         long id = todoRepository.saveTodo(reqTodo);
@@ -72,11 +73,10 @@ public class TodoServiceImpl implements TodoService{
 
         int updatedRow = todoRepository.updateTodo(id, reqTodo);
         if (updatedRow == 0) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "변경된 내용이 없습니다.");
+            throw TodoExceptions.notChanged();
         }
 
-        Todo resTodo = todoRepository.findTodoById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "해당 일정이 존재하지 않습니다."));
+        Todo resTodo = todoRepository.findTodoById(id).orElseThrow(TodoExceptions::notFound);
         return new TodoResponseDTO(resTodo);
     }
 
@@ -87,21 +87,20 @@ public class TodoServiceImpl implements TodoService{
 
         int deletedRow = todoRepository.deleteTodo(id);
         if (deletedRow == 0) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "해당 일정이 존재하지 않습니다.");
+            throw TodoExceptions.notFound();
         }
     }
 
-
     private Todo getTodoById(Long id){
         return todoRepository.findTodoById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "해당 일정이 존재하지 않습니다."));
+                .orElseThrow(TodoExceptions::notFound);
     }
 
     private void passwordCheck(Long id, TodoRequestDTO req){
-        Author author = authorRepository.findAuthorById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "해당 작성자가 존재하지 않습니다."));
+        Author author = authorRepository.findAuthorById(id).orElseThrow(AuthorExceptions::notFound);
 
         if(!passwordMatches(req.getPassword(), author.getPassword())){
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "비밀번호가 올바르지 않습니다.");
+            throw AuthorExceptions.invalidPassword();
         }
     }
 
