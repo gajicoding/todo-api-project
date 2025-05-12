@@ -185,8 +185,184 @@
 
 
 ### 도전 기능
+[//]: # (일정 생성)
+<details>
+<summary>일정 생성 API</summary>
 
+- Method: POST
+- URL: `/api/v2/todos`
+- Request Body
+```json5
+{
+  "title": "Spring 공부",
+  "contents": "Spring 기초 1~3주차 강의 학습",
+  "authorId": 1,
+  "password": "1234"
+}
+```
+- Response (201 Created)
 
+```json
+{
+  "id": 13,
+  "title": "Spring 공부",
+  "contents": "Spring 기초 1~3주차 강의 학습",
+  "author": {
+    "id": 1,
+    "name": "김나경",
+    "email": "gajicoding@gmail.com",
+    "createdAt": "2025-05-12T14:33:11",
+    "updatedAt": "2025-05-12T18:49:16"
+  },
+  "createdAt": "2025-05-12T14:33:11",
+  "updatedAt": "2025-05-12T18:49:16"
+}
+```
+</details>
+
+[//]: # (전체 일정 조회)
+<details>
+<summary>전체 일정 조회 API</summary>
+
+- Method: GET
+- URL: `/api/v2/todos`
+- Query Parameters
+    - updatedAt: 수정일
+        - type: String
+        - format: YYYY-MM-DD
+        - required: false
+    - authorId: 작성자 ID
+        - type: Long
+        - required: false
+    - page: 페이지 번호
+        - type: int
+        - required: false
+    - size: 페이지 크기
+        - type: int
+        - required: false
+- Response (200 OK)
+```json
+{
+  "data": [
+    {
+      "id": 10,
+      "title": "Spring 공부",
+      "contents": "Spring 기초 1~3주차 강의 학습",
+      "author": {
+        "id": 1,
+        "name": "김나경",
+        "email": "gajicoding@gmail.com",
+        "createdAt": "2025-05-12T14:33:11",
+        "updatedAt": "2025-05-12T17:18:45"
+      },
+      "createdAt": "2025-05-12T14:33:11",
+      "updatedAt": "2025-05-12T17:18:45"
+    },
+    {
+      "id": 11,
+      "title": "Spring 공부",
+      "contents": "Spring 기초 1~3주차 강의 학습",
+      "author": {
+        "id": 1,
+        "name": "김나경",
+        "email": "gajicoding@gmail.com",
+        "createdAt": "2025-05-12T14:33:11",
+        "updatedAt": "2025-05-12T17:18:45"
+      },
+      "createdAt": "2025-05-12T14:33:11",
+      "updatedAt": "2025-05-12T17:18:45"
+    }
+  ],
+  "page": 1,
+  "size": 2,
+  "totalElements": 10,
+  "totalPages": 5
+}
+```
+</details>
+
+[//]: # (선택 일정 조회)
+<details>
+<summary>선택 일정 조회 API</summary>
+
+- Method: GET
+- URL: `/api/v2/todos/{id}`
+- Response (200 OK)
+```json
+{
+  "id": 1,
+  "title": "Spring 심화 공부1",
+  "contents": "Spring 심화 1~3주차 강의 학습",
+  "author": {
+    "id": 1,
+    "name": "김나경",
+    "email": "gajicoding@gmail.com",
+    "createdAt": "2025-05-12T14:33:11",
+    "updatedAt": "2025-05-12T17:17:58"
+  },
+  "createdAt": "2025-05-12T14:33:11",
+  "updatedAt": "2025-05-12T17:17:58"
+}
+```
+
+</details>
+
+[//]: # (선택 일정 수정)
+<details>
+<summary>선택 일정 수정 API</summary>
+
+- Method: PATCH
+- URL: `/api/v2/todos/{id}`
+- Request Body
+```json5
+{
+  "title": "Spring 심화 공부1",
+  "contents": "Spring 심화 1~3주차 강의 학습",
+  "authorId": 1,
+  "password": "1234"
+}
+```
+
+- Response (200 OK)
+```json
+{
+  "id": 1,
+  "title": "Spring 심화 공부1",
+  "contents": "Spring 심화 1~3주차 강의 학습",
+  "author": {
+    "id": 1,
+    "name": "김나경",
+    "email": "gajicoding@gmail.com",
+    "createdAt": "2025-05-12T14:33:11",
+    "updatedAt": "2025-05-12T17:17:58"
+  },
+  "createdAt": "2025-05-12T14:33:11",
+  "updatedAt": "2025-05-12T17:17:58"
+}
+```
+</details>
+
+[//]: # (선택 일정 삭제)
+<details>
+<summary>선택 일정 삭제 API</summary>
+
+- Method: POST
+- URL: `/api/v2/todos/{id}`
+- Request Body
+```json5
+{
+  "authorId": 1,
+  "password": "1234"
+}
+```
+
+- Response (200 OK)
+```json
+{
+  "message": "일정이 성공적으로 삭제되었습니다."
+}
+```
+</details>
 
 ## 데이터 베이스 설계
 <details>
@@ -218,11 +394,13 @@
 - [빌더 패턴 (Builder Pattern)](https://gajicoding.tistory.com/325)
 - [생성자 vs 정적 팩토리 메서드 vs 빌더 패턴](https://gajicoding.tistory.com/327)
 - [Entity와 DTO(Data Transfer Object)의 차이](https://gajicoding.tistory.com/324)
-- [Repository에서 Request/Response DTO 를 사용해도 될까?](https://gajicoding.tistory.com/328)
+- (비공개) [Repository에서 Request/Response DTO 를 사용해도 될까?](https://gajicoding.tistory.com/328)
+- [다중 데이터소스 설정 하기 (feat. DB 여러 개 연결하기)](https://gajicoding.tistory.com/331)
 
 ## 문제 해결 (트러블 슈팅)
 프로젝트를 진행하면서 겪은 문제 상황, 해결 정리
 - [406 Not Acceptable - responseDTO @Getter 의 중요성](https://gajicoding.tistory.com/329)
+- [Caused by: java.lang.IllegalArgumentException: jdbcUrl is required with driverClassName.](https://gajicoding.tistory.com/332)
 
 
 
