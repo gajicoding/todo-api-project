@@ -40,11 +40,10 @@ public class AuthorRepositoryImpl implements AuthorRepository {
                 .usingGeneratedKeyColumns("id")
                 .usingColumns("name", "email", "password");
 
-        Map<String, Object> parameters = new HashMap<>() {{
-            put("name", reqAuthor.getName());
-            put("email", reqAuthor.getEmail());
-            put("password", reqAuthor.getPassword());
-        }};
+        Map<String, Object> parameters = new HashMap<>();
+        parameters.put("name", reqAuthor.getName());
+        parameters.put("email", reqAuthor.getEmail());
+        parameters.put("password", reqAuthor.getPassword());
 
         Number key = jdbcInsert.executeAndReturnKey(new MapSqlParameterSource(parameters));
 

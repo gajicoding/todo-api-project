@@ -30,11 +30,10 @@ public class TodoRepositoryImpl implements TodoRepository {
                 .usingGeneratedKeyColumns("id")
                 .usingColumns("title", "contents", "author_id");
 
-        Map<String, Object> parameters = new HashMap<>() {{
-            put("title", reqTodo.getTitle());
-            put("contents", reqTodo.getContents());
-            put("author_id", reqTodo.getAuthor().getId());
-        }};
+        Map<String, Object> parameters = new HashMap<>();
+        parameters.put("title", reqTodo.getTitle());
+        parameters.put("contents", reqTodo.getContents());
+        parameters.put("author_id", reqTodo.getAuthor().getId());
 
         Number key = jdbcInsert.executeAndReturnKey(new MapSqlParameterSource(parameters));
 
