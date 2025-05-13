@@ -66,8 +66,8 @@ public class TodoServiceImpl implements TodoService {
 
     @Override
     public TodoResponseDTO updateTodo(Long id, TodoRequestDTO req) {
-        getTodoById(id);
-        passwordCheck(req.getAuthorId(), req);
+        Todo todo = getTodoById(id);
+        passwordCheck(req.getAuthorId(), todo, req);
 
         Todo reqTodo = req.toEntity();
 
@@ -82,8 +82,8 @@ public class TodoServiceImpl implements TodoService {
 
     @Override
     public void deleteTodo(Long id, TodoRequestDTO req) {
-        getTodoById(id);
-        passwordCheck(req.getAuthorId(), req);
+        Todo todo = getTodoById(id);
+        passwordCheck(req.getAuthorId(), todo, req);
 
         int deletedRow = todoRepository.deleteTodo(id);
         if (deletedRow == 0) {
@@ -96,8 +96,12 @@ public class TodoServiceImpl implements TodoService {
                 .orElseThrow(TodoExceptions::notFound);
     }
 
-    private void passwordCheck(Long id, TodoRequestDTO req){
-        Author author = authorRepository.findAuthorById(id).orElseThrow(AuthorExceptions::notFound);
+    private void passwordCheck(Long authorId, Todo todo, TodoRequestDTO req){
+        if(!authorId.equals(todo.getAuthor().getId())){
+            throw TodoExceptions.forbidden();
+        }
+
+        Author author = authorRepository.findAuthorById(authorId).orElseThrow(AuthorExceptions::notFound);
 
         if(!passwordMatches(req.getPassword(), author.getPassword())){
             throw AuthorExceptions.invalidPassword();

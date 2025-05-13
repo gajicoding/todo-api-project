@@ -13,4 +13,8 @@ public class TodoExceptions {
     public static ResponseStatusException notFound() {
         return new ResponseStatusException(HttpStatus.NOT_FOUND, "해당 일정이 존재하지 않습니다.");
     }
+
+    public static ResponseStatusException forbidden() {
+        return new ResponseStatusException(HttpStatus.NOT_FOUND, "작성자가 일치하지 않습니다.");
+    }
 }
