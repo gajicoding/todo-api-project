@@ -1,5 +1,17 @@
 # CH 3: 일정 관리 앱 만들기
-## 단계별 요구사항
+## 🛠 사용 기술
+- Spring Boot
+- JDBC
+- MySQL
+
+## 💻 개발 도구
+- Postman
+- Git
+- IntelliJ IDEA
+
+---
+
+## 📝 단계별 요구사항
 `필수 기능`
 - Lv 0. API 명세 및 ERD 작성
 - Lv 1. 일정 생성 및 조회
@@ -11,7 +23,7 @@
 - Lv 5. 예외 발생 처리
 - Lv 6. null 체크 및 특정 패턴에 대한 검증 수행
 
-## API 명세서
+## 📜 API 명세서
 - Postman: [document](https://documenter.getpostman.com/view/44635744/2sB2j9687J)
 
 ### 필수기능
@@ -363,7 +375,7 @@
 ```
 </details>
 
-## 데이터 베이스 설계
+## 🧮 데이터 베이스 설계
 <details>
 <summary>필수 기능 DB 설계</summary>
 
@@ -388,7 +400,9 @@
     - ![erdE2](./images/erdE2.png)
 </details>
 
-## 폴더 구조 (간단)
+---
+
+## 📁 폴더 구조 (간단)
 ```bash
 todo-api-project
 ├──── src
@@ -411,7 +425,7 @@ todo-api-project
 ```
 
 
-## 새로운 지식
+## 🔍 새로운 지식
 프로젝트를 진행하면서 알게된 지식 정리
 - [빌더 패턴 (Builder Pattern)](https://gajicoding.tistory.com/325)
 - [생성자 vs 정적 팩토리 메서드 vs 빌더 패턴](https://gajicoding.tistory.com/327)
@@ -419,10 +433,7 @@ todo-api-project
 - (비공개) [Repository에서 Request/Response DTO 를 사용해도 될까?](https://gajicoding.tistory.com/328)
 - [다중 데이터소스 설정 하기 (feat. DB 여러 개 연결하기)](https://gajicoding.tistory.com/331)
 
-## 문제 해결 (트러블 슈팅)
+## 🧰 문제 해결 (트러블 슈팅)
 프로젝트를 진행하면서 겪은 문제 상황, 해결 정리
 - [406 Not Acceptable - responseDTO @Getter 의 중요성](https://gajicoding.tistory.com/329)
 - [Caused by: java.lang.IllegalArgumentException: jdbcUrl is required with driverClassName.](https://gajicoding.tistory.com/332)
-
-
-
