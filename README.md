@@ -9,6 +9,8 @@
 - Git
 - IntelliJ IDEA
 
+<br>
+<br>
 
 ## 📝 단계별 요구사항
 `필수 기능`
@@ -399,6 +401,8 @@
     - ![erdE2](./images/erdE2.png)
 </details>
 
+<br>
+<br>
 
 ## 📁 폴더 구조 (간단)
 ```bash
@@ -422,6 +426,8 @@ todo-api-project
 └──── todo_v2.sql
 ```
 
+<br>
+<br>
 
 ## 🔍 새로운 지식
 프로젝트를 진행하면서 알게된 지식 정리
