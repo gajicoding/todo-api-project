@@ -4,6 +4,8 @@
 - JDBC
 - MySQL
 
+<br>
+
 ## 💻 개발 도구
 - Postman
 - Git
@@ -22,6 +24,8 @@
 - Lv 4. 페이지네이션
 - Lv 5. 예외 발생 처리
 - Lv 6. null 체크 및 특정 패턴에 대한 검증 수행
+
+<br>
 
 ## 📜 API 명세서
 - Postman: [document](https://documenter.getpostman.com/view/44635744/2sB2j9687J)
@@ -375,6 +379,8 @@
 ```
 </details>
 
+<br>
+
 ## 🧮 데이터 베이스 설계
 <details>
 <summary>필수 기능 DB 설계</summary>
@@ -433,6 +439,8 @@ todo-api-project
 - [Entity와 DTO(Data Transfer Object)의 차이](https://gajicoding.tistory.com/324)
 - (비공개) [Repository에서 Request/Response DTO 를 사용해도 될까?](https://gajicoding.tistory.com/328)
 - [다중 데이터소스 설정 하기 (feat. DB 여러 개 연결하기)](https://gajicoding.tistory.com/331)
+
+<br>
 
 ## 🧰 문제 해결 (트러블 슈팅)
 프로젝트를 진행하면서 겪은 문제 상황, 해결 정리
