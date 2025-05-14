@@ -28,7 +28,7 @@
 <br>
 
 ## 📜 API 명세서
-- Postman: [document](https://documenter.getpostman.com/view/44635744/2sB2j9687J)
+Postman: [document](https://documenter.getpostman.com/view/44635744/2sB2j9687J)
 
 ### 필수기능
 
