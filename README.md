@@ -10,7 +10,6 @@
 - IntelliJ IDEA
 
 <br>
-<br>
 
 ## 📝 단계별 요구사항
 `필수 기능`
@@ -402,7 +401,6 @@
 </details>
 
 <br>
-<br>
 
 ## 📁 폴더 구조 (간단)
 ```bash
@@ -426,7 +424,6 @@ todo-api-project
 └──── todo_v2.sql
 ```
 
-<br>
 <br>
 
 ## 🔍 새로운 지식
