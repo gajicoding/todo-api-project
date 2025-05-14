@@ -388,6 +388,29 @@
     - ![erdE2](./images/erdE2.png)
 </details>
 
+## 폴더 구조 (간단)
+```bash
+todo-api-project
+├──── src
+│  ├──── main
+│  │  ├──── java
+│  │  │  └──── com.github.gajicoding.todo_api_project
+│  │  │     ├──── api
+│  │  │     │  │──── v1 (필수 기능)
+│  │  │     │  └──── v2 (도전 기능)
+│  │  │     ├──── common
+│  │  │     ├──── config
+│  │  │     └──── TodoApiProjectApplication.java
+│  │  └──── resources
+│  │     └──── application.properties
+│  └──── test
+├──── build.gradle
+├──── README.md
+├──── todo.sql
+└──── todo_v2.sql
+```
+
+
 ## 새로운 지식
 프로젝트를 진행하면서 알게된 지식 정리
 - [빌더 패턴 (Builder Pattern)](https://gajicoding.tistory.com/325)
